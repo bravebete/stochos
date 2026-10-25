@@ -989,7 +989,7 @@
 
 
       // =========================================================
-      // TIMBRE
+      // TIMBRE (fusionné dans la carte Couleur : voir CATS dans index.html)
       // =========================================================
 
       const timbres = [
@@ -1040,12 +1040,6 @@
           desc: "Des membranes tendues, frappées par les mains ou des baguettes.",
           tech: "Tambours, congas, tablas, djembé, grosse caisse ; hauteur variable",
           ex: "Djembé, tablas, tom grave",
-        },
-        {
-          name: "Métaux",
-          desc: "Des résonances dures, longues, qui chantent.",
-          tech: "Cloches, gongs, cymbales, plaques ; partiels inharmoniques",
-          ex: "Gong, cloches tubulaires, plaques",
         },
         {
           name: "Verre",
