@@ -386,17 +386,6 @@
         gap: 2px;
       }
 
-      .sdetail {
-        grid-column: 2 / -1;
-        padding: 2px 0 6px;
-        font-size: 14px;
-        text-align: left;
-      }
-
-      .sdetail dl {
-        margin-top: 4px;
-      }
-
       .summary :focus-visible {
         outline-color: var(--card-ink);
       }
@@ -599,10 +588,6 @@
           gap: 0 8px;
           padding: 4px 0;
         }
-        .sdetail {
-          grid-column: 1 / -1;
-          font-size: 13px;
-        }
         .srow .label {
           grid-column: 1 / -1;
           font-size: 9.5px;
@@ -763,7 +748,7 @@
       let repere = { bpm: null, key: "" };
       let histories = [];
       const summaryRows = {};
-      const summaryOpen = new Set();
+      const openNext = new Set();
       let view = "single";
 
       // =========================================================
@@ -855,7 +840,8 @@
       function drawOne(id) {
         const cat = CATS.find((c) => c.id === id);
         state[id] = pickDifferent(cat.data, state[id]).name;
-        if (view === "single") summaryOpen.add(id);
+        // Vue Table ou Liste : la carte re-tirée s'ouvre (et reste ouverte aux tirages suivants).
+        if (view !== "single") openNext.add(id);
         afterChange(id);
       }
 
@@ -990,7 +976,8 @@
         const view = cards[id];
         // Une carte dont les détails sont ouverts les garde ouverts quand on la re-tire.
         const previous = view.face.querySelector("details");
-        const keepOpen = !!(previous && previous.open);
+        const keepOpen = !!(previous && previous.open) || openNext.has(id);
+        openNext.delete(id);
         view.face.replaceChildren();
 
         const name = document.createElement("h2");
@@ -1040,8 +1027,8 @@
           const pick = document.createElement("button");
           pick.type = "button";
           pick.className = "pick";
-          pick.title = "Afficher ou masquer les détails";
-          pick.addEventListener("click", () => toggleSummaryDetail(id));
+          pick.title = "Voir le détail";
+          pick.addEventListener("click", () => openDetail(id));
 
           const lock = actionButton("lock", label, id);
           const reroll = actionButton("reroll", label, id);
@@ -1061,12 +1048,8 @@
             l.textContent = label;
             row.append(l, pick, acts);
           }
-          const detail = document.createElement("div");
-          detail.className = "sdetail";
-          detail.hidden = true;
-          row.appendChild(detail);
           box.appendChild(row);
-          summaryRows[id] = { row, pick, lock, detail };
+          summaryRows[id] = { row, pick, lock };
         });
       }
 
@@ -1080,31 +1063,22 @@
       }
 
       function updateSummaryRow(id) {
-        const r = summaryRows[id];
-        r.pick.textContent = summaryText(id);
-        const item = id === "rep" ? null : findItem(id);
-        const open = hasDetails(item) && summaryOpen.has(id);
-        r.detail.replaceChildren();
-        r.detail.hidden = !open;
-        if (hasDetails(item)) r.pick.setAttribute("aria-expanded", String(open));
-        else r.pick.removeAttribute("aria-expanded");
-        if (open) {
-          const dl = document.createElement("dl");
-          fillDetails(dl, item);
-          r.detail.appendChild(dl);
-        }
-        // Les accords du genre dépendent de la tonique des repères.
-        if (id === "rep" && summaryRows.gen) updateSummaryRow("gen");
+        summaryRows[id].pick.textContent = summaryText(id);
       }
 
       function updateSummary() {
         ORDER.forEach(updateSummaryRow);
       }
 
-      function toggleSummaryDetail(id) {
-        if (summaryOpen.has(id)) summaryOpen.delete(id);
-        else summaryOpen.add(id);
-        updateSummaryRow(id);
+      // Ouvre la carte correspondante dans la vue Table, avec ses détails.
+      function openDetail(id) {
+        openNext.add(id);
+        setView("grid");
+        const card = cards[id].card;
+        card.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "center" });
+        if (!reducedMotion && card.animate) {
+          card.animate([{ transform: "scale(1.04)" }, { transform: "scale(1)" }], { duration: 500, easing: "ease-out" });
+        }
       }
 
       // Une seule ligne se retourne (comme une carte) puis affiche son nouveau contenu.
