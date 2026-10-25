@@ -152,6 +152,29 @@
         gap: 20px;
       }
 
+      .card,
+      .srow {
+        background-color: var(--tint, var(--card));
+        background-image: var(--vimg, none);
+        background-size: var(--vsize, auto);
+        background-repeat: var(--vrepeat, repeat);
+        background-position: var(--vpos, 0 0);
+      }
+
+      .card .cat,
+      .card .name,
+      .srow .label,
+      .srow .pick {
+        text-shadow: 0 0 3px var(--tint, transparent), 0 0 6px var(--tint, transparent), 0 0 10px var(--tint, transparent);
+      }
+
+      .card.dark,
+      .srow.dark {
+        --card-ink: #efe8d6;
+        --card-muted: #cfc8b4;
+        --card-line: #55524b;
+      }
+
       .card {
         position: relative;
         display: flex;
@@ -160,7 +183,6 @@
         padding: 22px 22px 16px;
         text-align: center;
         color: var(--card-ink);
-        background: var(--card);
         border-radius: 3px;
         box-shadow: 0 1px 0 #fff8 inset, 0 10px 24px #0007;
       }
@@ -354,7 +376,8 @@
         grid-template-columns: 112px minmax(0, 1fr) auto;
         align-items: baseline;
         gap: 4px 14px;
-        padding: 11px 0;
+        margin: 0 -14px;
+        padding: 11px 14px;
         border-top: 1px solid var(--card-line);
       }
 
@@ -586,7 +609,7 @@
           align-content: center;
           align-items: center;
           gap: 0 8px;
-          padding: 4px 0;
+          padding: 4px 14px;
         }
         .srow .label {
           grid-column: 1 / -1;
@@ -661,6 +684,12 @@
           </svg>
         </button>
         </div>
+        <button class="icon-btn" id="visualsBtn" type="button" aria-pressed="true" aria-label="Motifs de fond" title="Motifs de fond">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <rect x="4" y="4" width="16" height="16" rx="1.5" />
+            <path d="M4 10l6-6M4 16L16 4M8 20L20 8M14 20l6-6" />
+          </svg>
+        </button>
       </div>
 
       <section class="summary" id="summary" aria-label="Tirage complet"></section>
@@ -676,6 +705,7 @@
     </main>
 
     <script src="data.js"></script>
+    <script src="visuals.js"></script>
     <script>
       // =========================================================
       // CONFIGURATION
@@ -748,6 +778,7 @@
       let histories = [];
       const summaryRows = {};
       const openNext = new Set();
+      let visualsOn = true;
       let view = "single";
 
       // =========================================================
@@ -971,6 +1002,24 @@
         return !!item && Object.keys(item).some((k) => k !== "name" && k !== "desc");
       }
 
+      // Fond de la carte ou de la ligne : teinte et motif liés à la valeur tirée (voir visuals.js).
+      function applyVisual(el, id, item) {
+        ["--tint", "--vimg", "--vsize", "--vrepeat", "--vpos"].forEach((p) => el.style.removeProperty(p));
+        const v = visualsOn ? visualFor(id, item, repere) : null;
+        el.classList.toggle("dark", !!(v && v.dark));
+        if (!v) return;
+        // Dans une ligne (vue « une carte »), les formes plein cadre sont répétées en largeur pour garder leurs proportions.
+        const compact = el.classList.contains("srow");
+        const layers = v.layers.map((l) =>
+          compact && (l[1] === "100% 100%" || l[1] === "88% 88%") ? [l[0], "auto 100%", "repeat-x", "0 50%"] : l
+        );
+        el.style.setProperty("--tint", v.tint);
+        el.style.setProperty("--vimg", layers.map((l) => l[0]).join(", "));
+        el.style.setProperty("--vsize", layers.map((l) => l[1]).join(", "));
+        el.style.setProperty("--vrepeat", layers.map((l) => l[2]).join(", "));
+        el.style.setProperty("--vpos", layers.map((l) => l[3]).join(", "));
+      }
+
       function renderCard(id) {
         const view = cards[id];
         // Une carte dont les détails sont ouverts les garde ouverts quand on la re-tire.
@@ -986,11 +1035,13 @@
         if (id === "rep") {
           const parts = [repere.bpm ? `${repere.bpm} BPM` : repere.key ? "tempo libre" : "", repere.key];
           name.textContent = parts.filter(Boolean).join("  ·  ") || "—";
+          applyVisual(view.card, "rep", null);
           if (cards.gen && state.gen) renderCard("gen");
           return;
         }
 
         const item = findItem(id);
+        applyVisual(view.card, id, item);
         if (!item) {
           name.textContent = "—";
         } else {
@@ -1062,7 +1113,9 @@
       }
 
       function updateSummaryRow(id) {
-        summaryRows[id].pick.textContent = summaryText(id);
+        const r = summaryRows[id];
+        r.pick.textContent = summaryText(id);
+        applyVisual(r.row, id, id === "rep" ? null : findItem(id));
       }
 
       function updateSummary() {
@@ -1291,6 +1344,20 @@
         });
 
         buildSummary();
+
+        try {
+          visualsOn = localStorage.getItem("stochos-visuals") !== "off";
+        } catch (e) {}
+        const vbtn = document.getElementById("visualsBtn");
+        vbtn.setAttribute("aria-pressed", String(visualsOn));
+        vbtn.addEventListener("click", () => {
+          visualsOn = !visualsOn;
+          vbtn.setAttribute("aria-pressed", String(visualsOn));
+          try {
+            localStorage.setItem("stochos-visuals", visualsOn ? "on" : "off");
+          } catch (e) {}
+          renderAll();
+        });
 
         // À l'ouverture, on commence toujours par la vue « une carte ».
         setView("single");
