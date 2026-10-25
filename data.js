@@ -948,6 +948,227 @@
       ];
 
       // =========================================================
+      // IDÉE CENTRALE
+      // =========================================================
+
+      const idees = [
+        {
+          name: "Un seul son",
+          desc: "Tout le morceau est bâti sur un seul son, exploré à fond.",
+          tech: "Une source unique, travaillée par filtre, hauteur, densité et espace",
+          ex: "Éliane Radigue - Trilogie de la Mort",
+        },
+        {
+          name: "Un rythme",
+          desc: "Une cellule rythmique ; tout le reste n'est que décor.",
+          tech: "Pattern central, variations de timbre et d'accents autour",
+          ex: "Steve Reich - Clapping Music",
+        },
+        {
+          name: "Un accord",
+          desc: "Un seul accord, éclairé sous toutes ses faces.",
+          tech: "Accord fixe ; on varie le voicing, l'orchestration et le registre",
+          ex: "La Monte Young, drones harmoniques",
+        },
+        {
+          name: "Une mélodie",
+          desc: "Une mélodie simple qu'on déforme, ralentit ou cache.",
+          tech: "Thème court varié par transformation : renversement, ralentissement, harmonisation",
+          ex: "Max Richter - Recomposed (Vivaldi)",
+        },
+        {
+          name: "Une boucle",
+          desc: "Quelques secondes qui reviennent, un peu changées à chaque fois.",
+          tech: "Boucle courte, légère variation ou dégradation à chaque retour",
+          ex: "William Basinski - Disintegration Loops",
+        },
+        {
+          name: "Un silence",
+          desc: "Le morceau est construit autour d'une absence.",
+          tech: "Une grande pause ou un vide central ; tout s'organise autour",
+          ex: "John Cage - 4'33''",
+        },
+        {
+          name: "Une erreur",
+          desc: "Un accident gardé, puis développé comme un motif.",
+          tech: "Prise ratée, glitch ou saturation involontaire gardés et répétés",
+          ex: "Oval, Autechre",
+        },
+        {
+          name: "Un souvenir",
+          desc: "Un morceau qui sonne comme un souvenir flou.",
+          tech: "Lo-fi, échantillon ancien, passe-bas, hauteur instable (wow et flutter)",
+          ex: "The Caretaker - Everywhere at the End of Time",
+        },
+        {
+          name: "Une voix",
+          desc: "Une voix humaine, parlée, chantée ou murmurée, en est le cœur.",
+          tech: "Voix traitée comme matière : texte, formants, échantillons",
+          ex: "Steve Reich - Come Out",
+        },
+        {
+          name: "Un objet",
+          desc: "Un objet détourné devient l'instrument.",
+          tech: "Sons d'un seul objet (frappé, frotté, échantillonné) comme unique matière",
+          ex: "Matmos - A Chance to Cut Is a Chance to Cure",
+        },
+        {
+          name: "Une règle",
+          desc: "Une consigne simple, qu'on laisse se dérouler seule.",
+          tech: "Processus musical : règle appliquée mécaniquement (déphasage, accumulation)",
+          ex: "Steve Reich - It's Gonna Rain",
+        },
+      ];
+
+
+      // =========================================================
+      // CONTRASTE
+      // =========================================================
+
+      const contrastes = [
+        {
+          name: "Doux et violent",
+          desc: "Une tendresse qui cache de la brutalité, ou l'inverse.",
+          tech: "Timbres lisses et attaques dures ; dynamique extrême entre sections",
+          ex: "Swans, Godspeed You! Black Emperor",
+        },
+        {
+          name: "Précis et chaotique",
+          desc: "Une rigueur qui déraille, un désordre qui s'organise.",
+          tech: "Grille rythmique stricte ; éléments qui dérapent ou se désynchronisent",
+          ex: "Autechre, Aphex Twin",
+        },
+        {
+          name: "Intime et gigantesque",
+          desc: "Un murmure dans un espace démesuré.",
+          tech: "Voix ou instrument proche, très sec ; arrière-plan immense (stéréo, réverb)",
+          ex: "Bon Iver, Sigur Rós",
+        },
+        {
+          name: "Ancien et futuriste",
+          desc: "Un vieux monde et un monde à venir dans le même son.",
+          tech: "Instruments historiques ou samples anciens avec synthèse moderne",
+          ex: "Wendy Carlos - Switched-On Bach, Bonobo",
+        },
+        {
+          name: "Humain et machine",
+          desc: "Un geste vivant dans un décor mécanique.",
+          tech: "Jeu humain (imprécisions, souffle) sur séquences et sons programmés",
+          ex: "Kraftwerk, Jon Hopkins",
+        },
+        {
+          name: "Lumineux et sombre",
+          desc: "Une clarté traversée d'ombre.",
+          tech: "Harmonies ouvertes et basses profondes ; timbres brillants sur fond grave",
+          ex: "Boards of Canada, Burial",
+        },
+        {
+          name: "Fragile et massif",
+          desc: "Une chose minuscule face à une énorme.",
+          tech: "Notes isolées et grosses couches ; très peu d'éléments contre beaucoup",
+          ex: "Hildur Guðnadóttir, Sunn O)))",
+        },
+        {
+          name: "Calme et menaçant",
+          desc: "Rien ne bouge, et pourtant quelque chose approche.",
+          tech: "Tempo lent, texture stable ; micro-dissonances ou basses qui montent",
+          ex: "Hans Zimmer, Trent Reznor & Atticus Ross",
+        },
+        {
+          name: "Joyeux et triste",
+          desc: "Une danse sur une blessure.",
+          tech: "Rythme enjoué avec harmonie mineure, ou mélodie légère sur accords sombres",
+          ex: "Röyksopp - What Else Is There?, Sufjan Stevens",
+        },
+        {
+          name: "Lent et agité",
+          desc: "Un grand calme tendu de micro-mouvements.",
+          tech: "Pulsation lente ; couche rapide en subdivisions, trémolos ou arpèges",
+          ex: "Philip Glass, Tycho",
+        },
+        {
+          name: "Naturel et artificiel",
+          desc: "Un son vivant plié par la technique.",
+          tech: "Field recordings ou instruments acoustiques sur synthèse et traitements",
+          ex: "Fennesz, Björk - Vespertine",
+        },
+        {
+          name: "Familier et étrange",
+          desc: "Quelque chose de connu, légèrement faussé.",
+          tech: "Progression ou rythme classique déformé : désaccord, pitch, timing décalé",
+          ex: "Oneohtrix Point Never, The Caretaker",
+        },
+      ];
+
+
+      // =========================================================
+      // ÉTAT DU SON
+      // =========================================================
+
+      const etats = [
+        {
+          name: "Neuf",
+          desc: "Propre, brillant, sorti de l'emballage.",
+          tech: "Production nette, haute définition, peu de bruit, aucune saturation",
+          ex: "Pop moderne, synthés numériques",
+        },
+        {
+          name: "Usé",
+          desc: "Fatigué, patiné par le temps.",
+          tech: "Saturation de bande, wow et flutter, légère perte d'aigus",
+          ex: "Boards of Canada, vieilles cassettes",
+        },
+        {
+          name: "Fêlé",
+          desc: "Il y a une cassure dedans, une imperfection voulue.",
+          tech: "Distorsion partielle, clipping, craquements, micro-coupures",
+          ex: "Autechre, Oval",
+        },
+        {
+          name: "Brûlé",
+          desc: "Surchargé, saturé jusqu'à fondre.",
+          tech: "Saturation extrême, fuzz, bitcrush, compression écrasante",
+          ex: "Merzbow, Sunn O)))",
+        },
+        {
+          name: "Gelé",
+          desc: "Figé, cristallisé, un instant arrêté.",
+          tech: "Freeze spectral, reverb infinie, sample bloqué, aucune évolution",
+          ex: "Éliane Radigue, effets de freeze",
+        },
+        {
+          name: "Humide",
+          desc: "Mouillé, flou, qui coule.",
+          tech: "Chorus, flanger, reverb dense, modulation lente, aigus adoucis",
+          ex: "Slowdive, My Bloody Valentine",
+        },
+        {
+          name: "Poussiéreux",
+          desc: "Vieux disque, grain, craquements.",
+          tech: "Bruit de vinyle, bande passante réduite, échantillons anciens",
+          ex: "Nujabes, DJ Shadow",
+        },
+        {
+          name: "Fantôme",
+          desc: "Presque absent : on entend l'écho, pas la source.",
+          tech: "Reverb et delays dominants, signal sec très bas, filtres",
+          ex: "Burial - Untrue",
+        },
+        {
+          name: "Détraqué",
+          desc: "Déréglé, qui ne tient pas en place.",
+          tech: "Hauteur instable, désaccord, tape wobble, modulation aléatoire",
+          ex: "The Caretaker, Oneohtrix Point Never",
+        },
+        {
+          name: "Nu",
+          desc: "Sans artifice : sec, cru, direct.",
+          tech: "Aucun effet, prise brute, mixage minimal",
+          ex: "Nick Drake - Pink Moon",
+        },
+      ];
+
+      // =========================================================
       // STRUCTURES
       // =========================================================
 
