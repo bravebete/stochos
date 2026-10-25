@@ -886,22 +886,64 @@
 
       const espaces = [
         {
+          name: "Placard",
+          desc: "Minuscule et étouffé : tout est absorbé.",
+          tech: "Pièce très petite, quasi sans reverb, son mat et proche, aigus absorbés",
+          ex: "Voix enregistrée dans un placard, cabine de voix",
+        },
+        {
           name: "Chambre",
           desc: "Intime, proche, une pièce en bois.",
           tech: "Reverb courte (moins d'1 s), peu de profondeur, son presque sec",
           ex: "Piano dans une chambre, enregistrement proche",
         },
         {
-          name: "Cathédrale",
-          desc: "Voûtes immenses, échos longs.",
-          tech: "Reverb de 4 à 10 s, pré-delay long, aigus adoucis",
+          name: "Salle de bain",
+          desc: "Du carrelage partout : brillant et rebondissant.",
+          tech: "Reverb courte et brillante, réflexions rapprochées, aigus marqués",
+          ex: "Chant sous la douche, claps dans une pièce carrelée",
+        },
+        {
+          name: "Église",
+          desc: "Hautes voûtes, longs échos qui flottent.",
+          tech: "Reverb de 4 à 8 s, pré-delay, aigus adoucis, queue dense",
           ex: "Chant grégorien, orgue d'église",
         },
         {
-          name: "Dehors",
-          desc: "Plein air, distance, peu de réflexions.",
-          tech: "Peu de reverb, échos lointains, bruit d'ambiance, aigus atténués",
-          ex: "Field recording, cor lointain",
+          name: "Salle de concert",
+          desc: "Large, chaleureuse, bien équilibrée.",
+          tech: "Reverb de 1,5 à 2,5 s, bon équilibre entre son direct et réverbéré",
+          ex: "Orchestre enregistré en salle",
+        },
+        {
+          name: "Parking souterrain",
+          desc: "Béton, échos froids, les bruits traînent.",
+          tech: "Réflexions dures, échos distincts, reverb moyenne et froide",
+          ex: "Claps et pas dans un parking, percussions bétonnées",
+        },
+        {
+          name: "Tunnel",
+          desc: "Long et étroit : tout file dans une direction.",
+          tech: "Delay court répété, filtre en peigne, réflexions rapprochées, son canalisé",
+          ex: "Passage d'un train, voix dans un tunnel",
+        },
+        {
+          name: "Forêt",
+          desc: "Les sons se perdent entre les arbres, très diffus.",
+          tech: "Peu de réflexions fortes, reverb diffuse et douce, ambiance, aigus atténués",
+          ex: "Field recording en forêt, voix lointaine",
+        },
+        {
+          name: "Montagne",
+          desc: "Un appel, puis l'écho qui revient très tard.",
+          tech: "Delays longs (0,5 à 2 s), peu de reverb, grande distance",
+          ex: "Cor des Alpes, appel et écho",
+        },
+        {
+          name: "Ciel ouvert",
+          desc: "Un horizon sans murs : tout s'étire.",
+          tech: "Stéréo très large, delays longs, aucune réverb de salle, air ambiant",
+          ex: "Pads stéréo larges, enregistrement en plein air",
         },
         {
           name: "Sous l'eau",
@@ -910,28 +952,16 @@
           ex: "Pad filtré, nappe désaccordée",
         },
         {
-          name: "Radio",
-          desc: "Étroit, grésillant, venu d'un vieux poste.",
+          name: "Sous la couette",
+          desc: "Chaud, étouffé, tout près de l'oreille.",
+          tech: "Passe-bas marqué, très sec, effet de proximité sur les graves",
+          ex: "Voix murmurée, musique entendue à travers un mur",
+        },
+        {
+          name: "Vieux poste",
+          desc: "Étroit et grésillant, venu d'un vieux poste.",
           tech: "Bande passante limitée (300 Hz à 3 kHz), saturation, bruit, bitcrush léger",
           ex: "Voix de téléphone, vieux 78 tours",
-        },
-        {
-          name: "Immense",
-          desc: "Large, enveloppant, qui remplit tout l'espace.",
-          tech: "Stéréo très large, reverb et delay longs, pistes doublées",
-          ex: "Mur de guitares, pads stéréo",
-        },
-        {
-          name: "Casque",
-          desc: "Tout près, dans la tête, murmuré à l'oreille.",
-          tech: "Son très sec et proche, mono ou binaural, peu de reverb",
-          ex: "Voix chuchotée, enregistrement binaural",
-        },
-        {
-          name: "Vide",
-          desc: "Sec, nu, sans aucun effet.",
-          tech: "Aucune reverb ni delay, mix dépouillé, silence autour",
-          ex: "Enregistrement sec, solo sans traitement",
         },
       ];
 
