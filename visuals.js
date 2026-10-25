@@ -83,25 +83,6 @@ const visualFor = (() => {
     return shape(svg(100, 100, body, "xMidYMid meet"), "88% 88%", "center");
   };
 
-  // ---------- Atmosphère ----------
-
-  const atm = {
-    "Éthérée": D("#e3edf5", [flat("radial-gradient(circle at 25% 20%, rgba(255,255,255,.95), transparent 55%), linear-gradient(160deg, #d9e8f4, #f1f6fa)")]),
-    "Tendue": D("#4a1614", [diag(18, 1, 0.1, LT), flat("linear-gradient(180deg, #2e0c0c, #7c2a20)")], true),
-    "Onirique": D("#eadff5", [flat("radial-gradient(circle at 75% 25%, #e9d6f7, transparent 55%), radial-gradient(circle at 20% 80%, #cfe4f6, transparent 55%), #f1eaf8")]),
-    "Mystérieuse": D("#23264a", [flat("radial-gradient(circle at 70% 30%, #4a4f8a, transparent 60%), #1f2244")], true),
-    "Mélancolique": D("#aebccb", [flat("linear-gradient(180deg, #bcc8d4, #8f9fb2)")]),
-    "Épique": D("#e9a948", [flat("linear-gradient(160deg, #f5cc74, #d9772a)")]),
-    "Lugubre": D("#161616", [noise(0.35, true), flat("linear-gradient(180deg, #1c1c1c, #0f0f0f)")], true),
-    "Joyeuse": D("#f6df6c", [dots(14, 2.2, 0.22), flat("linear-gradient(160deg, #f8e57d, #f3d24e)")]),
-    "Fantastique": D("#d6b6ef", [dots(30, 1.3, 0.55, LT), flat("linear-gradient(135deg, #d3b8f2, #f7c9de)")]),
-    "Urbaine": D("#b9b8b3", [grid(22, 1, 0.12), noise(0.3), flat("linear-gradient(180deg, #c3c2bd, #a9a8a3)")]),
-    "Tribal / Organique": D("#c4874b", [
-      tile(svg(24, 12, `<path d='M0 10 L6 2 L12 10 L18 2 L24 10' fill='none' stroke='${a(0.32)}' stroke-width='1.5'/>`, "xMidYMid meet"), "24px 12px"),
-      flat("linear-gradient(180deg, #cf9657, #b87a40)"),
-    ]),
-  };
-
   // ---------- Texture ----------
 
   const wave = (rowH, paths) =>
@@ -124,21 +105,6 @@ const visualFor = (() => {
     })(),
     "En nappes": D("#e5ddd0", [flat("radial-gradient(ellipse at 50% 20%, rgba(160,140,110,.35), transparent 60%), radial-gradient(ellipse at 40% 85%, rgba(120,150,170,.35), transparent 60%), linear-gradient(180deg, #ebe4d4, #e0d8c8)")]),
     "Percussive": D("#ece5d3", [dots(16, 3.2, 0.35)]),
-  };
-
-  // ---------- Couleur ----------
-
-  const col = {
-    "Chaleureuse": D("#e8b57c", [flat("linear-gradient(160deg, #f0c58f, #dc9a5c)")]),
-    "Froide": D("#bdd1e2", [flat("linear-gradient(160deg, #cfdeeb, #a9c0d6)")]),
-    "Saturée": D("#c9402b", [noise(0.4, true), flat("linear-gradient(160deg, #d8472f, #b53724)")], true),
-    "Sombre": D("#2a2a2f", [flat("linear-gradient(180deg, #34343a, #1d1d21)")], true),
-    "Claire": D("#f7f3e4", [flat("linear-gradient(180deg, #fbf8ec, #f1ecd9)")]),
-    "Transparente": D("#f1f5f5", [hbars(8, 1, 0.07), flat("linear-gradient(180deg, #f6f9f9, #ebf1f1)")]),
-    "Mate": D("#bcb7ad", [noise(0.25), flat("linear-gradient(180deg, #c3beb4, #b3aea4)")]),
-    "Brillante": D("#f6df7a", [flat("radial-gradient(circle at 70% 25%, rgba(255,255,255,.9), transparent 45%), linear-gradient(160deg, #f9e78f, #f1d160)")]),
-    "Boisée": D("#a67a52", [flat("repeating-linear-gradient(96deg, rgba(60,35,15,.16) 0 2px, transparent 2px 9px), linear-gradient(180deg, #b0835a, #9a6f48)")]),
-    "Métallique": D("#9aa1a8", [flat("linear-gradient(135deg, #8f979e, #dfe3e6 45%, #9aa1a8 60%, #d5d9dc)")]),
   };
 
   // ---------- Rythme ----------
@@ -317,19 +283,13 @@ const visualFor = (() => {
     return D(tint, [layers]);
   };
 
-  const MAPS = { atm, tex, col, rhy, str, dur, esp, mou, per };
+  // Pas de décor pour l'atmosphère, la couleur et les repères.
+  const NONE = ["atm", "col", "rep"];
+  const MAPS = { tex, rhy, str, dur, esp, mou, per };
   const cache = new Map();
 
-  // Repères : bandes verticales dont l'espacement suit le tempo.
-  const repereVisual = (bpm) => {
-    if (!bpm) return D(CREAM, [flat("linear-gradient(90deg, #f1ead8, #e1d9c5)")]);
-    const gap = Math.max(6, Math.min(46, Math.round(1500 / bpm)));
-    return D(CREAM, [vbars(gap, 2, 0.26)]);
-  };
-
   return (catId, item, repere) => {
-    if (catId === "rep") return repereVisual(repere && repere.bpm);
-    if (!item) return null;
+    if (NONE.includes(catId) || !item) return null;
     const key = `${catId}|${item.name}`;
     if (!cache.has(key)) {
       const map = MAPS[catId];
