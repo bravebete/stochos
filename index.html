@@ -152,24 +152,12 @@
         gap: 20px;
       }
 
-      .card,
       .deco {
         background-color: var(--tint, var(--card));
         background-image: var(--vimg, none);
         background-size: var(--vsize, auto);
         background-repeat: var(--vrepeat, repeat);
         background-position: var(--vpos, 0 0);
-      }
-
-      .card .cat,
-      .card .name {
-        text-shadow: 0 0 3px var(--tint, transparent), 0 0 6px var(--tint, transparent), 0 0 10px var(--tint, transparent);
-      }
-
-      .card.dark {
-        --card-ink: #efe8d6;
-        --card-muted: #cfc8b4;
-        --card-line: #55524b;
       }
 
       .card {
@@ -180,8 +168,19 @@
         padding: 22px 22px 16px;
         text-align: center;
         color: var(--card-ink);
+        background: var(--card);
         border-radius: 3px;
         box-shadow: 0 1px 0 #fff8 inset, 0 10px 24px #0007;
+      }
+
+      /* Vue Table : la zone de décor est dans le coin de la carte, à côté du titre. */
+      .card > .deco {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        width: 84px;
+        height: 30px;
+        border-radius: 3px;
       }
 
       .card.locked::after {
@@ -455,12 +454,19 @@
       .grid.list .card,
       .grid.list .card.wide {
         display: grid;
-        grid-template-columns: 150px minmax(0, 1fr) auto;
+        grid-template-columns: 150px minmax(0, 1fr) 120px auto;
         align-items: start;
         gap: 16px;
         min-height: 0;
         padding: 14px 20px;
         text-align: left;
+      }
+
+      .grid.list .card > .deco {
+        position: static;
+        width: auto;
+        height: 34px;
+        align-self: center;
       }
 
       .grid.list .cat {
@@ -652,6 +658,9 @@
         .grid.list .card,
         .grid.list .card.wide {
           grid-template-columns: minmax(0, 1fr) auto;
+        }
+        .grid.list .card > .deco {
+          display: none;
         }
         .grid.list .cat {
           grid-column: 1 / -1;
@@ -979,8 +988,11 @@
         const lock = actionButton("lock", label, id);
 
         tools.append(reroll, lock);
-        card.append(cat, face, tools);
-        cards[id] = { card, face, lock, select, label };
+        const deco = document.createElement("span");
+        deco.className = "deco";
+        deco.setAttribute("aria-hidden", "true");
+        card.append(cat, face, deco, tools);
+        cards[id] = { card, face, deco, lock, select, label };
         return card;
       }
 
@@ -1044,13 +1056,13 @@
         if (id === "rep") {
           const parts = [repere.bpm ? `${repere.bpm} BPM` : repere.key ? "tempo libre" : "", repere.key];
           name.textContent = parts.filter(Boolean).join("  ·  ") || "—";
-          applyVisual(view.card, "rep", null);
+          applyVisual(view.deco, "rep", null);
           if (cards.gen && state.gen) renderCard("gen");
           return;
         }
 
         const item = findItem(id);
-        applyVisual(view.card, id, item);
+        applyVisual(view.deco, id, item);
         if (!item) {
           name.textContent = "—";
         } else {
