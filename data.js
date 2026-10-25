@@ -117,6 +117,13 @@
           fx: "Granular synthesis, random FX",
         },
         {
+          name: "Hétérophonique",
+          desc: "La même mélodie jouée par plusieurs instruments, chacun avec ses ornements.",
+          ex: "Gamelan javanais, musique arabe traditionnelle",
+          instrus: "Gamelan, oud, nay, violon",
+          fx: "Peu de traitement, reverb naturelle",
+        },
+        {
           name: "Polyphonique",
           desc: "Plusieurs lignes mélodiques indépendantes se superposent.",
           ex: "Bach - Fugues",
@@ -1203,6 +1210,76 @@
           desc: "Ça monte, ça redescend, comme une houle.",
           tech: "Crescendos et decrescendos cycliques, volume automatisé en va-et-vient",
           ex: "Tycho, Boléro",
+        },
+      ];
+
+      // =========================================================
+      // MOUVEMENT (mouvement mélodique, des voix entre elles, harmonique et élan)
+      // =========================================================
+
+      const mouvements = [
+        {
+          name: "Par petits pas",
+          axe: "Une seule ligne",
+          desc: "La ligne avance note à note, doucement, sans jamais sauter.",
+          tech: "Mouvement conjoint : degrés voisins de la gamme, facile à chanter",
+          ex: "Beethoven - Ode à la joie",
+        },
+        {
+          name: "Par grands sauts",
+          axe: "Une seule ligne",
+          desc: "La ligne bondit d'une note à l'autre, avec de grands écarts.",
+          tech: "Mouvement disjoint : intervalles plus grands qu'un ton, effet dramatique",
+          ex: "Somewhere Over the Rainbow",
+        },
+        {
+          name: "Côte à côte",
+          axe: "Plusieurs voix",
+          desc: "Les voix montent et descendent ensemble, à la même distance.",
+          tech: "Mouvement parallèle : même direction, même intervalle entre les voix",
+          ex: "Claude Debussy - La Cathédrale engloutie",
+        },
+        {
+          name: "Dans le même sens",
+          axe: "Plusieurs voix",
+          desc: "Les voix vont dans la même direction, mais l'écart entre elles change.",
+          tech: "Mouvement semblable ou direct : même direction, intervalles différents",
+          ex: "Cordes qui accompagnent une mélodie",
+        },
+        {
+          name: "À contre-sens",
+          axe: "Plusieurs voix",
+          desc: "Quand l'une monte, l'autre descend : elles s'écartent et se croisent.",
+          tech: "Mouvement contraire : directions opposées, indépendance des lignes",
+          ex: "Johann Sebastian Bach - Inventions à deux voix",
+        },
+        {
+          name: "Une bouge, l'autre reste",
+          axe: "Plusieurs voix",
+          desc: "Une voix reste sur sa note pendant que l'autre se promène.",
+          tech: "Mouvement oblique : une voix tenue (pédale ou bourdon), l'autre mobile",
+          ex: "Cornemuse, musique indienne sur bourdon",
+        },
+        {
+          name: "Tout immobile",
+          axe: "Plusieurs voix",
+          desc: "Aucune voix ne bouge : le temps passe sur place.",
+          tech: "Mouvement statique : toutes les voix tenues sur les mêmes hauteurs",
+          ex: "La Monte Young, Éliane Radigue",
+        },
+        {
+          name: "Qui retombe chez soi",
+          axe: "Harmonie et élan",
+          desc: "La tension s'accumule, puis les accords retombent sur leur point d'arrivée.",
+          tech: "Mouvement des basses : dominante vers tonique (cadence parfaite V-I)",
+          ex: "Cadences des chorals de Bach",
+        },
+        {
+          name: "Poussée en avant",
+          axe: "Harmonie et élan",
+          desc: "Un élan qui entraîne l'oreille vers la suite.",
+          tech: "Mouvement vers l'avant : notes courtes vers notes longues, temps faibles vers temps forts",
+          ex: "Beethoven - Symphonie n°5 (début)",
         },
       ];
 
