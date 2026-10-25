@@ -345,9 +345,8 @@
         display: none;
       }
 
-      .summary .cat {
-        text-align: center;
-        margin-bottom: 8px;
+      .srow:first-child {
+        border-top: 0;
       }
 
       .srow {
@@ -415,14 +414,6 @@
         gap: 14px;
         margin-top: 8px;
         font-size: 13px;
-      }
-
-      .shint {
-        margin: 14px 0 0;
-        text-align: center;
-        font-size: 12px;
-        font-style: italic;
-        color: var(--card-muted);
       }
 
       /* ---------- Vue : liste ---------- */
@@ -588,10 +579,6 @@
           min-height: calc(100vh - 112px);
           min-height: calc(100dvh - 112px);
           padding: 6px 16px 10px;
-        }
-        .summary .cat,
-        .shint {
-          display: none;
         }
         .srow {
           flex: 1;
@@ -971,11 +958,6 @@
       function buildSummary() {
         const box = document.getElementById("summary");
 
-        const head = document.createElement("p");
-        head.className = "cat";
-        head.textContent = "Tirage";
-        box.appendChild(head);
-
         ORDER.forEach((id) => {
           const label = id === "rep" ? "Repères" : cards[id].label;
           const isFoot = id === "con";
@@ -1007,11 +989,6 @@
           box.appendChild(row);
           summaryRows[id] = { row, pick, lock };
         });
-
-        const hint = document.createElement("p");
-        hint.className = "shint";
-        hint.textContent = "Touchez un élément pour voir son détail dans la vue Table.";
-        box.appendChild(hint);
       }
 
       function summaryText(id) {
