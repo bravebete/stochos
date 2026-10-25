@@ -238,7 +238,7 @@ const visualFor = (() => {
   // ---------- Percussions ----------
 
   const per = {
-    "Aucune": D("#ece5d3", [flat("linear-gradient(#ece5d3, #ece5d3)")]),
+    "Aucune": null,
     "Batterie rock": D(CREAM, [steps(["xxxxxxxx", "..x...x.", "x...x..."], 8)]),
     "Batterie jazz": D(CREAM, [steps(["x..x.xx..x.x", "...x.....x..", "o..o..o..o.."], 12)]),
     "Électroniques": D(CREAM, [steps(["..x...x...x...x.", "....x.......x...", "x...x...x...x..."], 16)]),
@@ -293,7 +293,8 @@ const visualFor = (() => {
     const key = `${catId}|${item.name}`;
     if (!cache.has(key)) {
       const map = MAPS[catId];
-      cache.set(key, (map && map[item.name]) || fallback(item.name));
+      const found = map ? map[item.name] : undefined;
+      cache.set(key, found === undefined ? fallback(item.name) : found);
     }
     return cache.get(key);
   };
