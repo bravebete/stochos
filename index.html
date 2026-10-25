@@ -920,14 +920,11 @@
 
         const name = document.createElement("h2");
         name.className = "name";
-        const desc = document.createElement("p");
-        desc.className = "desc";
-        view.face.append(name, desc);
+        view.face.append(name);
 
         if (id === "rep") {
           const parts = [repere.bpm ? `${repere.bpm} BPM` : repere.key ? "tempo libre" : "", repere.key];
           name.textContent = parts.filter(Boolean).join("  ·  ") || "—";
-          desc.textContent = "Tempo et tonalité tirés selon le genre.";
           return;
         }
 
@@ -936,7 +933,6 @@
           name.textContent = "—";
         } else {
           name.textContent = item.name;
-          desc.textContent = item.desc || "";
           const keys = Object.keys(item).filter((k) => k !== "name" && k !== "desc");
           if (keys.length) {
             const details = document.createElement("details");
