@@ -283,8 +283,8 @@ const visualFor = (() => {
     return D(tint, [layers]);
   };
 
-  // Pas de décor pour l'atmosphère, la couleur et les repères.
-  const NONE = ["atm", "col", "rep"];
+  // Pas de décor pour l'atmosphère, la couleur, le genre et les repères.
+  const NONE = ["atm", "col", "gen", "rep"];
   const MAPS = { tex, rhy, str, dur, esp, mou, per };
   const cache = new Map();
 
