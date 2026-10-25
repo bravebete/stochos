@@ -727,6 +727,9 @@
       };
 
       const ROOTS = ["Do", "Do♯", "Ré", "Mi♭", "Mi", "Fa", "Fa♯", "Sol", "La♭", "La", "Si♭", "Si"];
+      const LETTERS = ["C", "D♭", "D", "E♭", "E", "F", "F♯", "G", "A♭", "A", "B♭", "B"];
+      const ROMAN = { I: 1, II: 2, III: 3, IV: 4, V: 5, VI: 6, VII: 7 };
+      const DEGREE_OFFSET = { 1: 0, 2: 2, 3: 4, 4: 5, 5: 7, 6: 9, 7: 11 };
       const MODES = ["majeur", "mineur", "dorien", "phrygien", "lydien", "mixolydien", "locrien"];
       const HISTORY_KEY = "strategies-sonores-history";
       const VIEW_KEY = "strategies-sonores-view";
@@ -773,6 +776,29 @@
         }
         const single = genre.bpm.match(/(\d+)/);
         return single ? +single[1] : null;
+      }
+
+      // Degrés (par rapport à la gamme majeure de la tonique) -> vrais accords.
+      // Majuscule = accord majeur, minuscule = mineur, b = degré abaissé d'un demi-ton.
+      function chordName(acc, deg, suffix, rootIdx) {
+        const lower = deg === deg.toLowerCase();
+        let offset = DEGREE_OFFSET[ROMAN[deg.toUpperCase()]];
+        if (acc === "b") offset -= 1;
+        if (acc === "#") offset += 1;
+        const note = LETTERS[(rootIdx + offset + 12) % 12];
+        if (suffix === "7") return note + (lower ? "m7" : "7");
+        if (suffix === "maj7") return note + (lower ? "m(maj7)" : "maj7");
+        return note + (lower ? "m" : "");
+      }
+
+      function chordify(text, rootIdx) {
+        const token = /(^|[^A-Za-zÀ-ÿ])([b#]?)(VII|VI|IV|V|III|II|I|vii|vi|iv|v|iii|ii|i)(maj7|7)?(?![A-Za-zÀ-ÿ0-9])/g;
+        return text.replace(token, (m, before, acc, deg, suffix) => before + chordName(acc, deg, suffix || "", rootIdx));
+      }
+
+      function rootOfKey(key) {
+        const i = ROOTS.findIndex((r) => key.startsWith(r + " "));
+        return i < 0 ? null : i;
       }
 
       function keyFromGenre(genre) {
@@ -917,6 +943,9 @@
 
       function renderCard(id) {
         const view = cards[id];
+        const previous = view.face.querySelector("details");
+        const keepOpen = !!(previous && previous.open && view.lastName === state[id]);
+        view.lastName = state[id];
         view.face.replaceChildren();
 
         const name = document.createElement("h2");
@@ -926,6 +955,7 @@
         if (id === "rep") {
           const parts = [repere.bpm ? `${repere.bpm} BPM` : repere.key ? "tempo libre" : "", repere.key];
           name.textContent = parts.filter(Boolean).join("  ·  ") || "—";
+          if (cards.gen && state.gen) renderCard("gen");
           return;
         }
 
@@ -940,7 +970,16 @@
             const summary = document.createElement("summary");
             summary.textContent = "détails";
             const dl = document.createElement("dl");
-            keys.forEach((k) => addField(dl, FIELD_LABELS[k] || k, item[k]));
+            keys.forEach((k) => {
+              addField(dl, FIELD_LABELS[k] || k, item[k]);
+              if (k === "progressions") {
+                const tonic = rootOfKey(repere.key || "");
+                const idx = tonic === null ? 0 : tonic;
+                const chords = chordify(item[k], idx);
+                if (chords !== item[k]) addField(dl, `En accords (tonique ${ROOTS[idx]} = ${LETTERS[idx]})`, chords);
+              }
+            });
+            details.open = keepOpen;
             details.append(summary, dl);
             view.face.appendChild(details);
           }
