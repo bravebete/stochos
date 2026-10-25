@@ -343,6 +343,7 @@
           instrus: "Synth pads, field recordings, piano doux",
           bpm: "40–70 BPM",
           signature: "4/4 ou libre",
+          progressions: "Un seul accord tenu · I – II (couleur lydienne) · Imaj7 – IVmaj7",
         },
         {
           name: "Dark Ambient",
@@ -352,6 +353,7 @@
           instrus: "Drones, basses, bruitages traités",
           bpm: "20–60 BPM ou libre",
           signature: "Libre",
+          progressions: "Drone sur i · i – bII (couleur phrygienne) · i – bVI",
         },
         {
           name: "Downtempo / Chill",
@@ -361,6 +363,7 @@
           instrus: "Beats doux, synthés, samples organiques",
           bpm: "70–100 BPM",
           signature: "4/4",
+          progressions: "i7 – IV7 (dorien) · ii7 – V7 – Imaj7 · Imaj7 – vi7 – ii7 – V7",
         },
         {
           name: "IDM / Glitch",
@@ -370,6 +373,7 @@
           instrus: "Drum machines, synths, effets glitch",
           bpm: "80–130 BPM",
           signature: "4/4, métriques brisées",
+          progressions: "Souvent peu ou pas de progression : accords isolés, clusters, harmonies statiques",
         },
         {
           name: "Néoclassique",
@@ -379,6 +383,7 @@
           instrus: "Piano, cordes, textures électroniques",
           bpm: "60–90 BPM",
           signature: "4/4 ou libre",
+          progressions: "I – V – vi – IV · vi – IV – I – V · i – VI – III – VII",
         },
         {
           name: "Electroacoustique",
@@ -388,6 +393,7 @@
           instrus: "Objets, micros de contact, synthés, traitements",
           bpm: "Libre",
           signature: "Libre",
+          progressions: "Pas de progression type : harmonie libre ou absente",
         },
         {
           name: "Techno",
@@ -397,6 +403,7 @@
           instrus: "Kick 4/4, synths séquencés, hi-hats",
           bpm: "120–140 BPM",
           signature: "4/4",
+          progressions: "i (un seul accord en boucle) · i – bVII · i – bII",
         },
         {
           name: "Minimal Techno",
@@ -406,6 +413,7 @@
           instrus: "Kick, hats, séquenceurs minimalistes",
           bpm: "120–128 BPM",
           signature: "4/4",
+          progressions: "i (accord unique) · i – bVII (deux accords alternés)",
         },
         {
           name: "Synthwave",
@@ -415,6 +423,7 @@
           instrus: "Synthés analogiques, basses séquencées, drums électroniques",
           bpm: "80–120 BPM",
           signature: "4/4",
+          progressions: "i – VI – III – VII · vi – IV – I – V · i – VII – VI – V",
         },
         {
           name: "Pop",
@@ -424,6 +433,7 @@
           instrus: "Voix lead, synthés, batterie, basse",
           bpm: "90–130 BPM",
           signature: "4/4",
+          progressions: "I – V – vi – IV · vi – IV – I – V · I – vi – IV – V",
         },
         {
           name: "Indie Pop",
@@ -433,6 +443,7 @@
           instrus: "Guitares, synthés, basse, batterie",
           bpm: "90–140 BPM",
           signature: "4/4",
+          progressions: "I – IV – vi – V · I – iii – IV – V · I – bVII – IV",
         },
         {
           name: "Rock",
@@ -442,6 +453,7 @@
           instrus: "Guitare électrique, basse, batterie",
           bpm: "100–150 BPM",
           signature: "4/4",
+          progressions: "I – IV – V · I – bVII – IV · i – bVI – bVII",
         },
         {
           name: "Indie Rock",
@@ -451,6 +463,7 @@
           instrus: "Guitares, basse, batterie, claviers",
           bpm: "90–140 BPM",
           signature: "4/4",
+          progressions: "I – IV – vi – V · vi – IV – I – V · i – bVII – bVI",
         },
         {
           name: "Garage Rock",
@@ -460,6 +473,7 @@
           instrus: "Guitare fuzz, basse, batterie sèche",
           bpm: "120–160 BPM",
           signature: "4/4",
+          progressions: "I – IV – V · I – IV – I – V",
         },
         {
           name: "Post-Rock",
@@ -469,6 +483,7 @@
           instrus: "Guitares delays, batterie, basse",
           bpm: "60–110 BPM",
           signature: "4/4, parfois 6/8",
+          progressions: "i – VI – III – VII · vi – IV – I – V · I – V – IV",
         },
         {
           name: "Shoegaze",
@@ -478,6 +493,7 @@
           instrus: "Guitares fuzz, pédales, basse, batterie",
           bpm: "80–130 BPM",
           signature: "4/4",
+          progressions: "Imaj7 – IVmaj7 · i – bVI – bVII · I – bVII – IV",
         },
         {
           name: "Punk Rock",
@@ -487,6 +503,7 @@
           instrus: "Guitare, basse, batterie, voix",
           bpm: "140–200 BPM",
           signature: "4/4",
+          progressions: "I – IV – V · I – V – vi – IV",
         },
         {
           name: "Hard Rock",
@@ -496,6 +513,7 @@
           instrus: "Guitares saturées, basse, batterie",
           bpm: "100–150 BPM",
           signature: "4/4",
+          progressions: "i – bVII – bVI – bVII · I – bVII – IV · I – IV – V",
         },
         {
           name: "Doom Metal",
@@ -505,6 +523,7 @@
           instrus: "Guitares graves, basse, batterie lente",
           bpm: "40–80 BPM",
           signature: "4/4",
+          progressions: "i – bVI – bVII · i – bII · riffs sur la tonique i",
         },
         {
           name: "Black Metal",
@@ -514,6 +533,7 @@
           instrus: "Guitares tremolo, batterie blastée, basse",
           bpm: "150–220 BPM",
           signature: "4/4, changements fréquents",
+          progressions: "i – bVI – bVII · i – bII (phrygien) · i – v",
         },
         {
           name: "Post-Metal",
@@ -523,6 +543,7 @@
           instrus: "Guitares lourdes, basses, batterie, drones",
           bpm: "60–110 BPM",
           signature: "4/4, 6/8, métriques variables",
+          progressions: "i – bVI – bVII · i – bIII – bVI – bVII",
         },
         {
           name: "Reggae",
@@ -532,6 +553,7 @@
           instrus: "Guitare skank, basse, orgue, batterie",
           bpm: "60–90 BPM",
           signature: "4/4",
+          progressions: "I – IV · I – V – vi – IV · i – bVII",
         },
         {
           name: "Dub",
@@ -541,6 +563,7 @@
           instrus: "Basse, batterie, consoles d'effets, synthés",
           bpm: "60–90 BPM",
           signature: "4/4",
+          progressions: "i – bVII · i – iv · i (accord unique)",
         },
         {
           name: "Dubstep",
@@ -550,6 +573,7 @@
           instrus: "Wobble bass, sub bass, drums, FX",
           bpm: "140 BPM",
           signature: "4/4",
+          progressions: "i – bVI – bVII · i – bII (phrygien) · pédale sur i",
         },
         {
           name: "Post-Dubstep",
@@ -559,6 +583,7 @@
           instrus: "Voix samplées, sub bass, textures",
           bpm: "120–140 BPM",
           signature: "4/4",
+          progressions: "vi – IV – I – V · ii7 – V – Imaj7 · i – bVI",
         },
         {
           name: "UK Garage",
@@ -568,6 +593,7 @@
           instrus: "Shuffle drums, basses, voix samplées",
           bpm: "125–135 BPM",
           signature: "4/4",
+          progressions: "i – bVI – bIII – bVII · ii7 – V7 – Imaj7 · vi – IV – I – V",
         },
         {
           name: "2-Step Garage",
@@ -577,6 +603,7 @@
           instrus: "Beats brisés, basses souples, voix",
           bpm: "130–135 BPM",
           signature: "4/4 en 2-step",
+          progressions: "i – bVI – bIII – bVII · ii7 – V7 – Imaj7 · vi – IV – I – V",
         },
         {
           name: "Drum & Bass / Jungle",
@@ -586,6 +613,7 @@
           instrus: "Amen break, sub bass, pads, samplers",
           bpm: "160–180 BPM",
           signature: "4/4 avec breakbeats",
+          progressions: "i – bVI – bVII · i – iv · pédale sur i",
         },
         {
           name: "Grime",
@@ -595,6 +623,7 @@
           instrus: "808, synth bass, percussion sèche",
           bpm: "140 BPM",
           signature: "4/4",
+          progressions: "i – bII · i – bVI – bVII · i (accord statique)",
         },
         {
           name: "Trap",
@@ -604,6 +633,7 @@
           instrus: "808, hi-hats triplés, claps, synthés",
           bpm: "130–150 BPM",
           signature: "4/4",
+          progressions: "i – bVI – bVII · i – bVI · i – iv",
         },
         {
           name: "Boom Bap",
@@ -613,6 +643,7 @@
           instrus: "Samples soul/jazz, kick, snare, basse",
           bpm: "85–95 BPM",
           signature: "4/4",
+          progressions: "ii7 – V7 · i7 – iv7 · Imaj7 – vi7",
         },
         {
           name: "Jazz Rap",
@@ -622,6 +653,7 @@
           instrus: "Piano, cuivres, contrebasse, samples",
           bpm: "80–95 BPM",
           signature: "4/4",
+          progressions: "ii7 – V7 – Imaj7 · i7 – IV7 (dorien) · Imaj7 – vi7 – ii7 – V7",
         },
         {
           name: "Lo-fi Hip-Hop",
@@ -631,6 +663,7 @@
           instrus: "Samples, drums filtrés, Rhodes",
           bpm: "60–90 BPM",
           signature: "4/4",
+          progressions: "Imaj7 – vi7 – ii7 – V7 · ii7 – V7 – Imaj7 · i7 – iv7",
         },
         {
           name: "UK Drill",
@@ -640,6 +673,7 @@
           instrus: "808 glissée, hi-hats, percussions sèches",
           bpm: "140 BPM",
           signature: "4/4",
+          progressions: "i – bII · i – bVI – bVII · i – iv",
         },
         {
           name: "Soul / R&B",
@@ -649,6 +683,7 @@
           instrus: "Voix, Rhodes, basse, batterie",
           bpm: "60–100 BPM",
           signature: "4/4",
+          progressions: "ii7 – V7 – Imaj7 · I – vi – ii – V · I – IV – I – V",
         },
         {
           name: "Funk",
@@ -658,6 +693,7 @@
           instrus: "Basse, guitare rythmique, cuivres, batterie",
           bpm: "90–120 BPM",
           signature: "4/4",
+          progressions: "I7 (vamp sur un seul accord) · i7 – IV7 (dorien) · I7 – IV7 – I7 – V7",
         },
         {
           name: "Bossa Nova",
@@ -667,6 +703,7 @@
           instrus: "Guitare nylon, percussions légères, voix",
           bpm: "60–100 BPM",
           signature: "4/4",
+          progressions: "ii7 – V7 – Imaj7 – VI7 · Imaj7 – ii7 – iii7 – ii7 · i7 – iv7 – V7",
         },
         {
           name: "Samba",
@@ -676,6 +713,7 @@
           instrus: "Surdo, caixa, pandeiro, cavaquinho",
           bpm: "90–140 BPM",
           signature: "2/4 ou 4/4",
+          progressions: "I – IV – V7 · ii7 – V7 – I · i – iv – V7 – i",
         },
         {
           name: "Cumbia",
@@ -685,6 +723,7 @@
           instrus: "Accordéon, tambours, guitare",
           bpm: "80–100 BPM",
           signature: "2/4 ou 4/4",
+          progressions: "I – IV – V · i – iv – V7 · I – V",
         },
         {
           name: "Afrobeat",
@@ -694,6 +733,7 @@
           instrus: "Batterie, congas, basse, guitares, cuivres",
           bpm: "90–120 BPM",
           signature: "4/4 avec polyrythmies",
+          progressions: "I7 (vamp sur un accord) · i7 – IV7 (dorien) · I – IV",
         },
         {
           name: "Highlife",
@@ -703,6 +743,7 @@
           instrus: "Guitares, cuivres, percussions",
           bpm: "100–130 BPM",
           signature: "4/4",
+          progressions: "I – IV – V · I – vi – IV – V",
         },
         {
           name: "Gnawa",
@@ -712,6 +753,7 @@
           instrus: "Guembri, qraqeb, voix",
           bpm: "80–110 BPM ou libre",
           signature: "4/4 ou cycles répétitifs",
+          progressions: "Pas de progression : ostinato du guembri sur un centre modal fixe",
         },
         {
           name: "Oriental / Tarab",
@@ -721,6 +763,7 @@
           instrus: "Oud, qanun, ney, darbuka",
           bpm: "Variable",
           signature: "Variable",
+          progressions: "Pas de progression d'accords : mélodie modale (maqâm) sur un centre, parfois un bourdon",
         },
         {
           name: "Flamenco",
@@ -730,6 +773,7 @@
           instrus: "Guitare flamenca, cajón, palmas",
           bpm: "90–160 BPM",
           signature: "3/4, 4/4 ou cycles de 12",
+          progressions: "Cadence andalouse i – bVII – bVI – V · I – bII – I (phrygien)",
         },
         {
           name: "Zouk / Kompa",
@@ -739,6 +783,7 @@
           instrus: "Guitare, basse, batterie, synthés",
           bpm: "80–110 BPM",
           signature: "4/4",
+          progressions: "I – IV – V · i – iv – V7 · vi – ii – V – I",
         },
         {
           name: "Folktronica",
@@ -748,6 +793,7 @@
           instrus: "Guitare acoustique, samples, synthés",
           bpm: "70–110 BPM",
           signature: "4/4",
+          progressions: "I – V – vi – IV · I – IV – V · vi – IV – I – V",
         },
         {
           name: "Cinematic / Score",
@@ -757,6 +803,7 @@
           instrus: "Orchestre, synthés, sound design",
           bpm: "Variable",
           signature: "Variable",
+          progressions: "i – bVI – bIII – bVII · i – bVI – iv · Imaj7 – bVII – IV",
         },
         {
           name: "Psybient",
@@ -766,6 +813,7 @@
           instrus: "Arpèges, textures, synthés, percussions",
           bpm: "60–100 BPM",
           signature: "4/4 ou libre",
+          progressions: "i – bII (phrygien) · i7 – IV7 · un accord tenu",
         },
         {
           name: "Jazz Modal",
@@ -775,6 +823,7 @@
           instrus: "Piano, contrebasse, batterie, saxophone",
           bpm: "60–120 BPM",
           signature: "4/4, parfois métriques variées",
+          progressions: "Vamps modaux longs sur un seul accord · i7 – bii7 – i7 (« So What ») · ii7 – V7 – Imaj7",
         },
       ];
 
