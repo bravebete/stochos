@@ -879,61 +879,6 @@
       ];
 
 
-      // =========================================================
-      // GESTE
-      // =========================================================
-
-      const gestes = [
-        {
-          name: "Caresse",
-          desc: "Attaque douce, à peine audible.",
-          tech: "Attaque lente (20 à 200 ms), peu de transitoire, legato",
-          ex: "Archet doux, pad, voix soufflée",
-        },
-        {
-          name: "Frappe",
-          desc: "Départ net et déclin court.",
-          tech: "Attaque instantanée, decay court, transitoire marqué",
-          ex: "Percussions, staccato de piano, pluck de synthé",
-        },
-        {
-          name: "Souffle qui monte",
-          desc: "Un son qui enfle lentement avant d'éclater.",
-          tech: "Swell : attaque très longue, crescendo, filtre qui s'ouvre",
-          ex: "Riser, archet en crescendo, cymbale inversée",
-        },
-        {
-          name: "Pincé",
-          desc: "Un départ net suivi d'un déclin naturel.",
-          tech: "Pluck : attaque rapide, decay moyen, sans sustain",
-          ex: "Harpe, guitare, kalimba",
-        },
-        {
-          name: "Frotté",
-          desc: "Un son entretenu par le frottement.",
-          tech: "Excitation continue : archet, doigt sur verre, sustain tenu",
-          ex: "Violoncelle à l'archet, verre frotté, gong frotté",
-        },
-        {
-          name: "Rebond",
-          desc: "Qui rebondit et se répète, de moins en moins fort.",
-          tech: "Répétitions décroissantes : delay, stutter, bouncing ball",
-          ex: "Balle qui rebondit, delay à feedback, roulement",
-        },
-        {
-          name: "Éclat",
-          desc: "Un coup franc, puis une longue résonance qui s'éteint.",
-          tech: "Attaque courte, decay et release très longs",
-          ex: "Cloche, gong, piano pédale enfoncée",
-        },
-        {
-          name: "Tenu",
-          desc: "Un son qui dure, sans départ ni fin nets.",
-          tech: "Sustain long, attaque et release lents, boucle continue",
-          ex: "Drone, orgue, nappe de synthé",
-        },
-      ];
-
 
       // =========================================================
       // ESPACE
