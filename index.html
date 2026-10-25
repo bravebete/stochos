@@ -684,17 +684,18 @@
       const CATS = [
         { id: "atm", label: "Atmosphère", data: atmospheres },
         { id: "gen", label: "Genre / style", data: genres },
-        { id: "har", label: "Harmonie", data: harmonies },
+        { id: "har", label: "Couleur des notes", data: harmonies },
         { id: "mou", label: "Mouvement", data: mouvements },
+        { id: "tex", label: "Texture", data: textures },
         { id: "mat", label: "Matière", data: matieres },
-        { id: "ges", label: "Geste", data: gestes },
+        { id: "ges", label: "Façon de jouer", data: gestes },
         { id: "esp", label: "Espace", data: espaces },
         { id: "str", label: "Structure", data: structures },
         { id: "dur", label: "Durée", data: durees },
       ];
 
       // Ordre d'affichage. Pour réactiver les consignes : remettre la ligne « con » dans CATS, "con" à la fin de ORDER et le script consignes.js.
-      const ORDER = ["atm", "gen", "har", "mou", "mat", "ges", "esp", "str", "dur", "rep"];
+      const ORDER = ["atm", "gen", "har", "mou", "tex", "mat", "ges", "esp", "str", "dur", "rep"];
 
       const FIELD_LABELS = {
         ex: "Exemple",

@@ -727,6 +727,91 @@
 
 
       // =========================================================
+      // TEXTURE
+      // =========================================================
+
+      const textures = [
+        {
+          name: "Un seul fil",
+          desc: "Une seule ligne, sans rien autour.",
+          tech: "Monophonie : une seule ligne mélodique, sans accompagnement",
+          ex: "Chant grégorien",
+        },
+        {
+          name: "Tous ensemble",
+          desc: "Toutes les voix avancent d'un même pas, comme un choral.",
+          tech: "Homophonie : voix qui suivent le même rythme, mélodie soutenue par des accords",
+          ex: "Johann Sebastian Bach - Chorals",
+        },
+        {
+          name: "Voix libres",
+          desc: "Plusieurs lignes qui vivent leur vie et se croisent.",
+          tech: "Polyphonie : lignes mélodiques indépendantes (fugue, canon)",
+          ex: "Johann Sebastian Bach - L'Art de la fugue",
+        },
+        {
+          name: "Mélodie ornée",
+          desc: "La même mélodie, jouée par tous, chacun à sa façon.",
+          tech: "Hétérophonie : une ligne unique variée et ornée par plusieurs instruments",
+          ex: "Gamelan javanais, musique arabe traditionnelle",
+        },
+        {
+          name: "Clairsemée",
+          desc: "Peu de sons, beaucoup de silence entre eux.",
+          tech: "Très peu d'événements, grands espaces et silences",
+          ex: "Morton Feldman - Piano and String Quartet",
+        },
+        {
+          name: "Dense",
+          desc: "Des couches partout : un mur de son.",
+          tech: "Beaucoup de pistes superposées, doublages, mur sonore",
+          ex: "My Bloody Valentine - Loveless",
+        },
+        {
+          name: "En nappes",
+          desc: "De larges accords qui enveloppent et évoluent lentement.",
+          tech: "Pads et cordes tenues, accords larges, sans rythme marqué",
+          ex: "Brian Eno - Music for Airports",
+        },
+        {
+          name: "Drone",
+          desc: "Une note tenue très longtemps, comme un sol sur lequel tout repose.",
+          tech: "Une ou deux hauteurs soutenues, sol harmonique fixe",
+          ex: "Éliane Radigue, La Monte Young",
+        },
+        {
+          name: "Granulaire",
+          desc: "Un son émietté en minuscules grains, puis recomposé.",
+          tech: "Synthèse granulaire : micro-fragments de 1 à 100 ms",
+          ex: "Fennesz - Endless Summer",
+        },
+        {
+          name: "Fragmentée",
+          desc: "Des éclats courts, découpés, qui sautent.",
+          tech: "Éléments courts et discontinus : glitch, stutter, découpes",
+          ex: "Oneohtrix Point Never - Replica",
+        },
+        {
+          name: "Tissée",
+          desc: "De petits motifs répétés et décalés qui s'entrelacent.",
+          tech: "Ostinatos et phasing : motifs courts répétés avec léger décalage",
+          ex: "Steve Reich - Music for 18 Musicians",
+        },
+        {
+          name: "Lisse",
+          desc: "Une surface sans aspérité, fondue.",
+          tech: "Harmoniques régulières, très peu de bruit, legato",
+          ex: "Pads de synthé filtrés, violons legato",
+        },
+        {
+          name: "Rugueuse",
+          desc: "Une surface abrasive, irrégulière, qui gratte.",
+          tech: "Bruit, distorsion, harmoniques instables",
+          ex: "Guitare bruitée, voix éraillée, noise",
+        },
+      ];
+
+      // =========================================================
       // MATIÈRE
       // =========================================================
 
