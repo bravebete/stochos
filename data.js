@@ -413,7 +413,7 @@
           instrus: "Kick, hats, séquenceurs minimalistes",
           bpm: "120–128 BPM",
           signature: "4/4",
-          progressions: "i (accord unique) · i – bVII (deux accords alternés)",
+          progressions: "Souvent un seul accord i en stabs courts · accords parallèles : la même forme d'accord déplacée (ex. i – bVII – i)",
         },
         {
           name: "Synthwave",
@@ -563,7 +563,7 @@
           instrus: "Basse, batterie, consoles d'effets, synthés",
           bpm: "60–90 BPM",
           signature: "4/4",
-          progressions: "i – bVII · i – iv · i (accord unique)",
+          progressions: "I – IV · I – V – vi – IV · i – bVII",
         },
         {
           name: "Dubstep",
@@ -573,7 +573,7 @@
           instrus: "Wobble bass, sub bass, drums, FX",
           bpm: "140 BPM",
           signature: "4/4",
-          progressions: "i – bVI – bVII · i – bII (phrygien) · pédale sur i",
+          progressions: "Pédale sur i, la basse mène (souvent avec bII phrygien) · i – bIII – bVII – bVI (montées et drops) · mélodique : vi – IV – V – I",
         },
         {
           name: "Post-Dubstep",
@@ -593,7 +593,7 @@
           instrus: "Shuffle drums, basses, voix samplées",
           bpm: "125–135 BPM",
           signature: "4/4",
-          progressions: "i – bVI – bIII – bVII · ii7 – V7 – Imaj7 · vi – IV – I – V",
+          progressions: "Accords de septième courts et syncopés (stabs m7, maj7, 9es) · ii7 – V7 – Imaj7 · i7 – iv7",
         },
         {
           name: "2-Step Garage",
@@ -603,7 +603,7 @@
           instrus: "Beats brisés, basses souples, voix",
           bpm: "130–135 BPM",
           signature: "4/4 en 2-step",
-          progressions: "i – bVI – bIII – bVII · ii7 – V7 – Imaj7 · vi – IV – I – V",
+          progressions: "Accords de septième courts et syncopés (stabs m7, maj7, 9es) · ii7 – V7 – Imaj7 · i7 – iv7",
         },
         {
           name: "Drum & Bass / Jungle",
@@ -613,17 +613,7 @@
           instrus: "Amen break, sub bass, pads, samplers",
           bpm: "160–180 BPM",
           signature: "4/4 avec breakbeats",
-          progressions: "i – bVI – bVII · i – iv · pédale sur i",
-        },
-        {
-          name: "Grime",
-          desc: "Rap électronique britannique sur des instrumentaux dépouillés et sombres.",
-          ex: "Skepta, Wiley",
-          mode: "Mineur naturel, phrygien",
-          instrus: "808, synth bass, percussion sèche",
-          bpm: "140 BPM",
-          signature: "4/4",
-          progressions: "i – bII · i – bVI – bVII · i (accord statique)",
+          progressions: "Liquid : i7 – bIIImaj7 – v7 – V (souvent étendus en 9es) · Neurofunk et jump-up : très peu d'harmonie, pédale sur i, la basse porte la tension",
         },
         {
           name: "Trap",
@@ -643,7 +633,7 @@
           instrus: "Samples soul/jazz, kick, snare, basse",
           bpm: "85–95 BPM",
           signature: "4/4",
-          progressions: "ii7 – V7 · i7 – iv7 · Imaj7 – vi7",
+          progressions: "i7 – iv7 (accords de septième venus de samples jazz ou soul) · bVI – V – i · ii7 – V7 – Imaj7",
         },
         {
           name: "Jazz Rap",

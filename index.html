@@ -386,6 +386,17 @@
         gap: 2px;
       }
 
+      .sdetail {
+        grid-column: 2 / -1;
+        padding: 2px 0 6px;
+        font-size: 14px;
+        text-align: left;
+      }
+
+      .sdetail dl {
+        margin-top: 4px;
+      }
+
       .summary :focus-visible {
         outline-color: var(--card-ink);
       }
@@ -588,6 +599,10 @@
           gap: 0 8px;
           padding: 4px 0;
         }
+        .sdetail {
+          grid-column: 1 / -1;
+          font-size: 13px;
+        }
         .srow .label {
           grid-column: 1 / -1;
           font-size: 9.5px;
@@ -728,6 +743,11 @@
 
       const ROOTS = ["Do", "Do♯", "Ré", "Mi♭", "Mi", "Fa", "Fa♯", "Sol", "La♭", "La", "Si♭", "Si"];
       const LETTERS = ["C", "D♭", "D", "E♭", "E", "F", "F♯", "G", "A♭", "A", "B♭", "B"];
+      // Orthographe des notes : lettre du degré + altération (C♯m7 en Si, B♭ en Ré mineur, etc.).
+      const LETTER_NAMES = ["C", "D", "E", "F", "G", "A", "B"];
+      const NATURAL_PC = [0, 2, 4, 5, 7, 9, 11];
+      const ROOT_NAMES = ["C", "C♯", "D", "E♭", "E", "F", "F♯", "G", "A♭", "A", "B♭", "B"];
+      const ROOT_LETTER = [0, 0, 1, 2, 2, 3, 3, 4, 5, 5, 6, 6];
       const ROMAN = { I: 1, II: 2, III: 3, IV: 4, V: 5, VI: 6, VII: 7 };
       const DEGREE_OFFSET = { 1: 0, 2: 2, 3: 4, 4: 5, 5: 7, 6: 9, 7: 11 };
       const MODES = ["majeur", "mineur", "dorien", "phrygien", "lydien", "mixolydien", "locrien"];
@@ -743,6 +763,7 @@
       let repere = { bpm: null, key: "" };
       let histories = [];
       const summaryRows = {};
+      const summaryOpen = new Set();
       let view = "single";
 
       // =========================================================
@@ -785,7 +806,11 @@
         let offset = DEGREE_OFFSET[ROMAN[deg.toUpperCase()]];
         if (acc === "b") offset -= 1;
         if (acc === "#") offset += 1;
-        const note = LETTERS[(rootIdx + offset + 12) % 12];
+        const pc = (rootIdx + offset + 12) % 12;
+        const letter = (ROOT_LETTER[rootIdx] + ROMAN[deg.toUpperCase()] - 1) % 7;
+        let shift = (((pc - NATURAL_PC[letter]) % 12) + 12) % 12;
+        if (shift > 6) shift -= 12;
+        const note = Math.abs(shift) > 1 ? LETTERS[pc] : LETTER_NAMES[letter] + (shift === 1 ? "♯" : shift === -1 ? "♭" : "");
         if (suffix === "7") return note + (lower ? "m7" : "7");
         if (suffix === "maj7") return note + (lower ? "m(maj7)" : "maj7");
         return note + (lower ? "m" : "");
@@ -830,6 +855,7 @@
       function drawOne(id) {
         const cat = CATS.find((c) => c.id === id);
         state[id] = pickDifferent(cat.data, state[id]).name;
+        if (view === "single") summaryOpen.add(id);
         afterChange(id);
       }
 
@@ -941,11 +967,30 @@
         dl.append(dt, dd);
       }
 
+      // Champs de détail d'une carte (utilisés dans la vue Table et dans la vue « une carte »).
+      function fillDetails(dl, item) {
+        Object.keys(item)
+          .filter((k) => k !== "name" && k !== "desc")
+          .forEach((k) => {
+            addField(dl, FIELD_LABELS[k] || k, item[k]);
+            if (k === "progressions") {
+              const tonic = rootOfKey(repere.key || "");
+              const idx = tonic === null ? 0 : tonic;
+              const chords = chordify(item[k], idx);
+              if (chords !== item[k]) addField(dl, `En accords (tonique ${ROOTS[idx]} = ${ROOT_NAMES[idx]})`, chords);
+            }
+          });
+      }
+
+      function hasDetails(item) {
+        return !!item && Object.keys(item).some((k) => k !== "name" && k !== "desc");
+      }
+
       function renderCard(id) {
         const view = cards[id];
+        // Une carte dont les détails sont ouverts les garde ouverts quand on la re-tire.
         const previous = view.face.querySelector("details");
-        const keepOpen = !!(previous && previous.open && view.lastName === state[id]);
-        view.lastName = state[id];
+        const keepOpen = !!(previous && previous.open);
         view.face.replaceChildren();
 
         const name = document.createElement("h2");
@@ -964,21 +1009,12 @@
           name.textContent = "—";
         } else {
           name.textContent = item.name;
-          const keys = Object.keys(item).filter((k) => k !== "name" && k !== "desc");
-          if (keys.length) {
+          if (hasDetails(item)) {
             const details = document.createElement("details");
             const summary = document.createElement("summary");
             summary.textContent = "détails";
             const dl = document.createElement("dl");
-            keys.forEach((k) => {
-              addField(dl, FIELD_LABELS[k] || k, item[k]);
-              if (k === "progressions") {
-                const tonic = rootOfKey(repere.key || "");
-                const idx = tonic === null ? 0 : tonic;
-                const chords = chordify(item[k], idx);
-                if (chords !== item[k]) addField(dl, `En accords (tonique ${ROOTS[idx]} = ${LETTERS[idx]})`, chords);
-              }
-            });
+            fillDetails(dl, item);
             details.open = keepOpen;
             details.append(summary, dl);
             view.face.appendChild(details);
@@ -1004,8 +1040,8 @@
           const pick = document.createElement("button");
           pick.type = "button";
           pick.className = "pick";
-          pick.title = "Voir le détail";
-          pick.addEventListener("click", () => openDetail(id));
+          pick.title = "Afficher ou masquer les détails";
+          pick.addEventListener("click", () => toggleSummaryDetail(id));
 
           const lock = actionButton("lock", label, id);
           const reroll = actionButton("reroll", label, id);
@@ -1025,8 +1061,12 @@
             l.textContent = label;
             row.append(l, pick, acts);
           }
+          const detail = document.createElement("div");
+          detail.className = "sdetail";
+          detail.hidden = true;
+          row.appendChild(detail);
           box.appendChild(row);
-          summaryRows[id] = { row, pick, lock };
+          summaryRows[id] = { row, pick, lock, detail };
         });
       }
 
@@ -1039,14 +1079,56 @@
         return state[id] || "—";
       }
 
-      function updateSummary(onlyIds) {
-        ORDER.forEach((id) => {
-          const r = summaryRows[id];
-          r.pick.textContent = summaryText(id);
-          if (onlyIds && onlyIds.includes(id) && !reducedMotion && r.row.animate) {
-            r.row.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 300 });
-          }
-        });
+      function updateSummaryRow(id) {
+        const r = summaryRows[id];
+        r.pick.textContent = summaryText(id);
+        const item = id === "rep" ? null : findItem(id);
+        const open = hasDetails(item) && summaryOpen.has(id);
+        r.detail.replaceChildren();
+        r.detail.hidden = !open;
+        if (hasDetails(item)) r.pick.setAttribute("aria-expanded", String(open));
+        else r.pick.removeAttribute("aria-expanded");
+        if (open) {
+          const dl = document.createElement("dl");
+          fillDetails(dl, item);
+          r.detail.appendChild(dl);
+        }
+        // Les accords du genre dépendent de la tonique des repères.
+        if (id === "rep" && summaryRows.gen) updateSummaryRow("gen");
+      }
+
+      function updateSummary() {
+        ORDER.forEach(updateSummaryRow);
+      }
+
+      function toggleSummaryDetail(id) {
+        if (summaryOpen.has(id)) summaryOpen.delete(id);
+        else summaryOpen.add(id);
+        updateSummaryRow(id);
+      }
+
+      // Une seule ligne se retourne (comme une carte) puis affiche son nouveau contenu.
+      function flipSummaryRow(id, delay) {
+        const row = summaryRows[id].row;
+        if (reducedMotion || !row.animate) {
+          updateSummaryRow(id);
+          return;
+        }
+        const pose = (deg) => `perspective(800px) rotateX(${deg}deg)`;
+        setTimeout(() => {
+          const out = row.animate(
+            [{ transform: pose(0), opacity: 1 }, { transform: pose(90), opacity: 0.2 }],
+            { duration: 150, easing: "ease-in", fill: "forwards" }
+          );
+          out.onfinish = () => {
+            updateSummaryRow(id);
+            row.animate(
+              [{ transform: pose(-90), opacity: 0.2 }, { transform: pose(0), opacity: 1 }],
+              { duration: 220, easing: "ease-out" }
+            );
+            out.cancel();
+          };
+        }, delay);
       }
 
       function flipSummary() {
@@ -1066,17 +1148,6 @@
           box.animate([{ transform: pose(-90) }, { transform: pose(0) }], { duration: 280, easing: "ease-out" });
           out.cancel();
         };
-      }
-
-      function openDetail(id) {
-        setView("grid");
-        const card = cards[id].card;
-        const details = card.querySelector("details");
-        if (details) details.open = true;
-        card.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "center" });
-        if (!reducedMotion && card.animate) {
-          card.animate([{ transform: "scale(1.04)" }, { transform: "scale(1)" }], { duration: 500, easing: "ease-out" });
-        }
       }
 
       // Effet de distribution : la carte se retourne sur sa tranche, change, puis se redresse.
@@ -1109,12 +1180,14 @@
           ids.forEach((id, i) => flip(id, i * 80));
           return;
         }
-        // Vue « une carte » : tirage complet = la carte se retourne, sinon seules les lignes changent.
+        // Vue « une carte » : tirage complet = la carte se retourne, sinon seules les lignes concernées se retournent.
         if (ids.length > 3) {
           flipSummary();
         } else {
-          ids.forEach(renderCard);
-          updateSummary(ids);
+          ids.forEach((id, i) => {
+            renderCard(id);
+            flipSummaryRow(id, i * 80);
+          });
         }
       }
 
