@@ -2,8 +2,17 @@
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Stratégies sonores</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Stochos</title>
+    <meta name="description" content="Cartes d'inspiration pour composer" />
+    <meta name="theme-color" content="#141311" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="icon" type="image/svg+xml" href="icons/icon.svg" />
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="Stochos" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
 
     <style>
       :root {
@@ -1186,6 +1195,10 @@
       // =========================================================
       // INITIALISATION
       // =========================================================
+
+      if ("serviceWorker" in navigator && location.protocol.startsWith("http")) {
+        window.addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {}));
+      }
 
       document.addEventListener("DOMContentLoaded", () => {
         const grid = document.getElementById("grid");
