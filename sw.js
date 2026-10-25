@@ -1,6 +1,6 @@
 // Mise en cache pour l'usage hors ligne.
 // Changer CACHE à chaque mise à jour des fichiers pour forcer le rafraîchissement.
-const CACHE = "stochos-v20";
+const CACHE = "stochos-v21";
 const FILES = [
   "./",
   "index.html",

@@ -737,7 +737,6 @@
       const DEGREE_OFFSET = { 1: 0, 2: 2, 3: 4, 4: 5, 5: 7, 6: 9, 7: 11 };
       const MODES = ["majeur", "mineur", "dorien", "phrygien", "lydien", "mixolydien", "locrien"];
       const HISTORY_KEY = "strategies-sonores-history";
-      const VIEW_KEY = "strategies-sonores-view";
       const HISTORY_MAX = 8;
 
       const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -1187,9 +1186,6 @@
           b.setAttribute("aria-pressed", String(b.dataset.view === view))
         );
         renderAll();
-        try {
-          localStorage.setItem(VIEW_KEY, view);
-        } catch (e) {}
       }
 
       // =========================================================
@@ -1296,11 +1292,8 @@
 
         buildSummary();
 
-        let saved = "single";
-        try {
-          saved = localStorage.getItem(VIEW_KEY) || "single";
-        } catch (e) {}
-        setView(["grid", "single", "list"].includes(saved) ? saved : "single");
+        // À l'ouverture, on commence toujours par la vue « une carte ».
+        setView("single");
 
         renderHistory();
         if (fromParams(new URLSearchParams(location.hash.slice(1)))) {
