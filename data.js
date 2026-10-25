@@ -989,6 +989,201 @@
 
 
       // =========================================================
+      // TIMBRE
+      // =========================================================
+
+      const timbres = [
+        {
+          name: "Voix",
+          desc: "Une voix humaine, avec son souffle, ses consonnes, son grain.",
+          tech: "Formants vocaux : chant, parole, murmure, chœur, voix échantillonnée ou vocodée",
+          ex: "Chœur, voix murmurée, voix pitchée",
+        },
+        {
+          name: "Cordes frottées",
+          desc: "Un son entretenu par l'archet, qui respire et glisse.",
+          tech: "Violon, alto, violoncelle, contrebasse ; archet, sul ponticello, harmoniques",
+          ex: "Quatuor à cordes, violoncelle solo",
+        },
+        {
+          name: "Cordes pincées",
+          desc: "Un départ net suivi d'une résonance qui s'éteint.",
+          tech: "Guitare, harpe, luth, oud, kora ; pincé, gratté, arpégé",
+          ex: "Harpe, guitare nylon, kora",
+        },
+        {
+          name: "Cuivres",
+          desc: "Un son large, cuivré, qui porte loin.",
+          tech: "Trompette, cor, trombone, tuba ; sourdine, vibrato de lèvres, attaque en coup de langue",
+          ex: "Cor solo, trompette bouchée",
+        },
+        {
+          name: "Anches",
+          desc: "Un son nasal et expressif, un peu rauque.",
+          tech: "Clarinette, hautbois, saxophone, bassons ; anche simple ou double, souffle",
+          ex: "Clarinette basse, saxophone",
+        },
+        {
+          name: "Flûtes et souffles",
+          desc: "De l'air qui devient son.",
+          tech: "Flûte, ney, shakuhachi, ocarina ; souffle mêlé à la note",
+          ex: "Shakuhachi, flûte alto",
+        },
+        {
+          name: "Claviers",
+          desc: "Des touches qui déclenchent des cordes, des tuyaux ou des lames.",
+          tech: "Piano, orgue, clavecin, Rhodes, célesta ; pédale, registre, jeu des mains",
+          ex: "Piano préparé, orgue de salon, Rhodes",
+        },
+        {
+          name: "Peaux",
+          desc: "Des membranes tendues, frappées par les mains ou des baguettes.",
+          tech: "Tambours, congas, tablas, djembé, grosse caisse ; hauteur variable",
+          ex: "Djembé, tablas, tom grave",
+        },
+        {
+          name: "Métaux",
+          desc: "Des résonances dures, longues, qui chantent.",
+          tech: "Cloches, gongs, cymbales, plaques ; partiels inharmoniques",
+          ex: "Gong, cloches tubulaires, plaques",
+        },
+        {
+          name: "Verre",
+          desc: "Cristallin et fragile, comme un bord de verre frotté.",
+          tech: "Harmonica de verre, verres frottés, vibraphone, synthèse cristalline",
+          ex: "Verres frottés, vibraphone sans vibrato",
+        },
+        {
+          name: "Synthé analogique",
+          desc: "Un son épais et chaud, qui bouge comme un organisme.",
+          tech: "Oscillateurs et filtres analogiques, dérive de hauteur, saturation",
+          ex: "Moog, Prophet, synthé modulaire",
+        },
+        {
+          name: "Synthé FM",
+          desc: "Un son brillant, métallique, aux timbres surprenants.",
+          tech: "Modulation de fréquence : cloches, pianos électriques, basses cristallines",
+          ex: "DX7, Elektron, FM8",
+        },
+        {
+          name: "Échantillons",
+          desc: "Des sons réels capturés puis rejoués.",
+          tech: "Samples, boucles, samplers, découpage et transposition",
+          ex: "Boucle de vinyle, sample de voix, enregistrement de terrain",
+        },
+        {
+          name: "Bruit",
+          desc: "Sans hauteur : friture, sifflement, statique.",
+          tech: "Bruit blanc ou rose filtré, craquements, feedback",
+          ex: "Bruit blanc filtré, craquements, feedback",
+        },
+        {
+          name: "Objets",
+          desc: "Des sons du quotidien, détournés.",
+          tech: "Field recording, objets frappés, frottés, échantillonnés",
+          ex: "Casseroles, papier, portes, outils",
+        },
+      ];
+
+
+      // =========================================================
+      // ESPACE (position dans l'espace en 3D)
+      // =========================================================
+
+      const espaces = [
+        {
+          name: "Dans la tête",
+          desc: "Le son est à l'intérieur de vous, sans extérieur.",
+          tech: "Très sec, mono ou binaural au casque, aucune réverb, proximité maximale",
+          ex: "Voix chuchotée au casque, ASMR",
+        },
+        {
+          name: "Tout près de l'oreille",
+          desc: "Intime : on sent le souffle, le grain, le moindre détail.",
+          tech: "Effet de proximité sur les graves, détails de bruit, très peu de réverb",
+          ex: "Voix murmurée, guitare au ras du micro",
+        },
+        {
+          name: "À bout de bras",
+          desc: "Proche mais pas collé : on peut le tenir à distance.",
+          tech: "Un peu de pièce, direct dominant, réverb discrète",
+          ex: "Piano au salon, trio acoustique",
+        },
+        {
+          name: "Au fond de la pièce",
+          desc: "Le son vient de l'autre bout, la pièce se fait entendre.",
+          tech: "Direct réduit, réflexions plus audibles, aigus un peu adoucis",
+          ex: "Orchestre entendu de loin, voix derrière une porte",
+        },
+        {
+          name: "Très loin",
+          desc: "À l'horizon : on devine plus qu'on n'entend.",
+          tech: "Niveau bas, aigus atténués, réverb et échos dominants",
+          ex: "Cloches au loin, cor sur la montagne",
+        },
+        {
+          name: "Tout autour",
+          desc: "Le son vous entoure, vous êtes au milieu.",
+          tech: "Spatialisation 360° : sources réparties autour de soi, enveloppement",
+          ex: "Sons répartis autour de l'auditeur, ambisonique",
+        },
+        {
+          name: "Large",
+          desc: "Étalé de gauche à droite, immense en largeur.",
+          tech: "Stéréo très large, pistes doublées, chorus, élargisseur",
+          ex: "Pads stéréo, mur de guitares",
+        },
+        {
+          name: "Étroit",
+          desc: "Ramassé en un point, au centre.",
+          tech: "Mono ou quasi-mono, centre serré, peu de largeur",
+          ex: "Radio, voix de téléphone, vieux mono",
+        },
+        {
+          name: "Au-dessus de soi",
+          desc: "Le son vient d'en haut : plafond, voûte, ciel.",
+          tech: "Aigus et air accentués, réverb montante, sources perçues en hauteur",
+          ex: "Chœur de voûte, nappe aérienne",
+        },
+        {
+          name: "Sous ses pieds",
+          desc: "Le son monte d'en bas : sol, cave, profondeur.",
+          tech: "Graves et sub accentués, passe-bas, sensation de vibration",
+          ex: "Sub-basse, grondement sourd",
+        },
+        {
+          name: "Qui s'approche",
+          desc: "Une source qui arrive peu à peu jusqu'à vous.",
+          tech: "Niveau croissant, aigus qui reviennent, réverb qui diminue (automation)",
+          ex: "Train qui arrive, pas qui approchent",
+        },
+        {
+          name: "Qui s'éloigne",
+          desc: "Une source qui part, jusqu'à disparaître.",
+          tech: "Niveau décroissant, aigus qui se perdent, réverb qui augmente",
+          ex: "Fanfare qui passe, voix qui se retire",
+        },
+        {
+          name: "Qui tourne",
+          desc: "Une source qui orbite autour de vous.",
+          tech: "Panoramique automatisé, effet Doppler léger, spatialisation en rotation",
+          ex: "Haut-parleur tournant, Leslie sur orgue",
+        },
+        {
+          name: "Derrière une vitre",
+          desc: "On voit, on entend, mais à travers une paroi.",
+          tech: "Filtre passe-bas, aigus absorbés, direct étouffé, réverb séparée",
+          ex: "Musique entendue à travers un mur",
+        },
+        {
+          name: "Plans étagés",
+          desc: "Plusieurs sources à des distances très différentes.",
+          tech: "Profondeur étagée : un son proche, un moyen, un lointain",
+          ex: "Voix devant, orchestre au loin, bruit d'ambiance au fond",
+        },
+      ];
+
+      // =========================================================
       // STRUCTURES
       // =========================================================
 
