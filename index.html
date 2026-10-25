@@ -683,20 +683,22 @@
 
       const CATS = [
         { id: "atm", label: "Atmosphère", data: atmospheres },
-        { id: "tex", label: "Texture", data: textures },
-        { id: "col", label: "Couleur", data: colors },
         { id: "gen", label: "Genre / style", data: genres },
-        { id: "rhy", label: "Rythme", data: rhythms },
-        { id: "per", label: "Percussions", data: percussions },
+        { id: "har", label: "Harmonie", data: harmonies },
+        { id: "mou", label: "Mouvement", data: mouvements },
+        { id: "mat", label: "Matière", data: matieres },
+        { id: "ges", label: "Geste", data: gestes },
+        { id: "esp", label: "Espace", data: espaces },
         { id: "str", label: "Structure", data: structures },
         { id: "dur", label: "Durée", data: durees },
       ];
 
       // Ordre d'affichage. Pour réactiver les consignes : remettre la ligne « con » dans CATS, "con" à la fin de ORDER et le script consignes.js.
-      const ORDER = ["atm", "tex", "col", "gen", "rhy", "per", "str", "dur", "rep"];
+      const ORDER = ["atm", "gen", "har", "mou", "mat", "ges", "esp", "str", "dur", "rep"];
 
       const FIELD_LABELS = {
         ex: "Exemple",
+        tech: "Côté technique",
         axe: "Axe",
         mode: "Gamme / mode",
         instrus: "Instruments",
@@ -723,7 +725,12 @@
       };
 
       const ROOTS = ["Do", "Do♯", "Ré", "Mi♭", "Mi", "Fa", "Fa♯", "Sol", "La♭", "La", "Si♭", "Si"];
-      const MODES = ["majeur", "mineur", "dorien", "phrygien", "lydien", "mixolydien", "locrien"];
+      const MODES = [
+        "majeur", "mineur", "dorien", "phrygien", "lydien", "mixolydien", "locrien",
+        "tons entiers", "octatonique", "hijaz", "bayati", "rast", "blues",
+      ];
+      const NO_PULSE = ["Immobile", "Respiration"];
+      const REPERE_SOURCES = ["gen", "har", "mou"];
       const HISTORY_KEY = "strategies-sonores-history";
       const VIEW_KEY = "strategies-sonores-view";
       const HISTORY_MAX = 8;
@@ -771,15 +778,21 @@
         return single ? +single[1] : null;
       }
 
-      function keyFromGenre(genre) {
-        const found = MODES.filter((m) => genre.mode.toLowerCase().includes(m));
+      // La tonalité suit l'harmonie tirée (sinon le genre) ; le tempo suit le genre, sauf mouvement sans pulsation.
+      function keyFromModes(text) {
+        const found = MODES.filter((m) => text.toLowerCase().includes(m));
         if (!found.length) return "libre / modal";
         return `${ROOTS[rand(ROOTS.length)]} ${found[rand(found.length)]}`;
       }
 
       function drawRepere() {
         const genre = findItem("gen");
-        repere = genre ? { bpm: bpmFromGenre(genre), key: keyFromGenre(genre) } : { bpm: null, key: "" };
+        const harmonie = findItem("har");
+        const mouvement = findItem("mou");
+        const modes = harmonie ? harmonie.mode : genre ? genre.mode : "";
+        const noPulse = mouvement && NO_PULSE.includes(mouvement.name);
+        const bpm = genre && !noPulse ? bpmFromGenre(genre) : null;
+        repere = genre || harmonie ? { bpm, key: keyFromModes(modes) } : { bpm: null, key: "" };
       }
 
       function drawAll() {
@@ -810,7 +823,7 @@
 
       function afterChange(id) {
         const ids = [id];
-        if (id === "gen" && !locks.has("rep")) {
+        if (REPERE_SOURCES.includes(id) && !locks.has("rep")) {
           drawRepere();
           ids.push("rep");
         }
@@ -1131,7 +1144,7 @@
       }
 
       function shortLine(p) {
-        return ["atm", "tex", "gen", "rhy"].map((k) => p.get(k) || "—").join(" · ");
+        return ["atm", "gen", "har", "mou"].map((k) => p.get(k) || "—").join(" · ");
       }
 
       function commit() {
